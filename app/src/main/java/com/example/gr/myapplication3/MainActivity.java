@@ -1,7 +1,9 @@
 package com.example.gr.myapplication3;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,6 +34,22 @@ public class MainActivity extends AppCompatActivity {
 
         tvSeter = (TextView) findViewById(R.id.textView5);
 
+        TextView tvhtml = (TextView) findViewById(R.id.tvHtml);
+
+        String htmlText = "Hai <b>Vvasia</b> <img src=\"ic_sentiment_satisfied\"> Hello";
+
+        //tvhtml.setText(Html.fromHtml(htmlText, new Html.ImageGetter()) );
+
+        tvhtml.setText(Html.fromHtml(htmlText, new Html.ImageGetter() {
+
+            @Override
+            public Drawable getDrawable(String source) {
+                int resourceId = getResources().getIdentifier(source, "drawable",getPackageName());
+                Drawable drawable = getResources().getDrawable(resourceId);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                return drawable;
+            }
+        }, null));
 
 
     }
